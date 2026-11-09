@@ -1,0 +1,13 @@
+{
+  "hits": [
+    {
+      "id": "b1",
+      "title": "Aztec Philosophy",
+      "isbn": ["978-1-60732-222-1"],
+      "copies": [
+        {"branch": "CENTRAL", "shelfmark": "B1015 M34", "state": "on shelf"},
+        {"branch": "NORTH", "shelfmark": "B1015 M34 c.2", "state": "checked out"}
+      ]
+    }
+  ]
+}

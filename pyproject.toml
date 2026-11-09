@@ -1,0 +1,104 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bookworm"
+version = "0.1.0"
+description = "Ask Mexico City's library catalogues whether they have a book"
+readme = "README.md"
+requires-python = ">=3.13"
+license = { text = "MIT" }
+authors = [{ name = "Maya Morales", email = "aka.mayberries@proton.me" }]
+
+# Pinned exactly, as in Kalens and Xolo: versions move deliberately, with the
+# suite green, never as a side effect of another change.
+dependencies = [
+    "pydantic==2.14.3",
+    "pydantic-settings==2.16.2",
+    "PyYAML==6.0.3",
+    "httpx==0.28.1",
+    "typer==0.29.0",
+    "rich==15.0.0",
+    # Imported lazily, only when an adapter needs a browser; `make browsers`
+    # downloads Chromium. See docs/DECISIONS.md, "Catalogue adapters".
+    "playwright==1.64.1",
+]
+
+[project.scripts]
+bookworm = "bookworm.cli:app"
+
+[dependency-groups]
+dev = [
+    "pytest==9.2.0",
+    "pytest-asyncio==1.4.1.post1",
+    "import-linter==2.16",
+    "ruff==0.17.4",
+    "mypy==2.4.1",
+    "types-PyYAML==6.0.12.20261103",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bookworm"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "session"
+asyncio_default_test_loop_scope = "session"
+# --strict-markers: a marker not listed below is an error, so a typo can't
+# silently skip a test. `live` tests talk to real catalogues and only run
+# with `make test-live`.
+addopts = "--strict-markers --strict-config -p tests._plugins.test_ids -m 'not live'"
+markers = [
+    "test_id(*ids): the story test case IDs (XXX-NNN) this test proves; run one with `make test ID=DIR-002` (tests/_plugins/test_ids.py)",
+    "live: talks to a real catalogue over the network; run with `make test-live`",
+]
+
+[tool.ruff]
+line-length = 110
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "ASYNC"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+plugins = ["pydantic.mypy"]
+mypy_path = "src"
+packages = ["bookworm"]
+
+[[tool.mypy.overrides]]
+module = ["playwright.*"]
+ignore_missing_imports = true
+
+# The layering rules in CLAUDE.md, enforced by `make lint`.
+[tool.importlinter]
+root_package = "bookworm"
+
+[[tool.importlinter.contracts]]
+name = "Layers inside each module: service → gateway → adapters → registry → repository → port → schemas"
+type = "layers"
+containers = ["bookworm.modules.*"]
+layers = ["(service)", "(gateway)", "(adapters)", "(registry)", "(repository)", "(port)", "(schemas)"]
+
+[[tool.importlinter.contracts]]
+name = "Modules only use each other through their public API (the package's __init__)"
+type = "forbidden"
+source_modules = ["bookworm.modules.*"]
+forbidden_modules = ["bookworm.modules.*.*"]
+allow_indirect_imports = true
+
+[[tool.importlinter.contracts]]
+name = "Shared code doesn't depend on any module or on the CLI"
+type = "forbidden"
+source_modules = ["bookworm.shared"]
+forbidden_modules = ["bookworm.modules", "bookworm.cli"]
+
+[[tool.importlinter.contracts]]
+name = "Only the CLI is an entry point: nothing imports it"
+type = "forbidden"
+source_modules = ["bookworm.modules", "bookworm.shared"]
+forbidden_modules = ["bookworm.cli"]

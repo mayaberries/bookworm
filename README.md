@@ -4,6 +4,17 @@ This is a project aimed at using tools like Playwright, API calls, and others to
 
 We're gonna be using Mexico City as a usecase. We need to map all the libraries we have in the city. We need to create a database that has all the data needed of each library to know how to interact with it.
 
+## Working on it
+
+```sh
+make install                 # Python 3.13 + uv
+uv run bookworm libraries list
+uv run bookworm find --isbn 978-1-60732-222-1
+make verify                  # lint, types, tests, records
+```
+
+Libraries and catalogues are Markdown files in `data/`. How the code is organised is in `CLAUDE.md`, why in `docs/DECISIONS.md`, and what comes next in `docs/ROADMAP.md`.
+
 ## The problem
 
 Mexico City has no single catalogue that covers all its libraries. The 16 alcaldías run more than 200 neighborhood public libraries, and the city network's site ([Red de Bibliotecas Públicas CDMX](https://web.sectei.cdmx.gob.mx/bibliotecas/red/)) mostly offers directories and open-access links, not a combined book search. Most small branches have no online catalogue at all, so the only way to check them is to call or visit.
