@@ -1,6 +1,6 @@
 # 🧱 Foundation: records, adapters and the lookup, proven offline
 
-← [Roadmap](../ROADMAP.md) · Next: [Census](02-census.md) →
+← [Roadmap](../ROADMAP.md) · Next: [Distribution](02-distribution.md) →
 
 Build the parts every later stage fills in: record files for libraries and catalogues, the port every catalogue adapter implements, the gateway that tries a catalogue's access methods in order, and the lookup that turns catalogue answers into per-library availability. Everything is proven with reference adapters and recorded responses; no real catalogue is wired yet.
 

@@ -8,7 +8,7 @@ Bookworm answers "is this book at that library?" for Mexico City, where no singl
 
 **State:** the Foundation stage is built (records, adapter port, gateway, lookup, CLI, harness), proven with reference adapters only. No real catalogue adapter exists yet; the seed records come from the README's landscape table. The work is tracked as documented in `docs/`:
 
-- `docs/ROADMAP.md`: the four stages (Foundation → Census → First catalogues → Coverage) and cross-stage open decisions.
+- `docs/ROADMAP.md`: the five stages (Foundation → Distribution → Census → First catalogues → Coverage) and cross-stage open decisions.
 - `docs/stages/NN-*.md`: per stage: what it demonstrates, exit criteria, its stories (each tagged with its board), story notes, open decisions and decisions made.
 - `docs/DECISIONS.md`: why things are built the way they are. When an open decision is made, record it here and in its stage's "Decisions made".
 - `docs/boards/`: one file per board (PLT, DIR, MAP, CAT, LKP), indexed in `docs/boards/README.md`. The board prefix is also the test ID prefix (`XXX-NNN`).

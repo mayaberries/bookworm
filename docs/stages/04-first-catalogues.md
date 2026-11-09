@@ -1,6 +1,6 @@
 # 🔌 First catalogues: real adapters where most books are
 
-← [Census](02-census.md) · Next: [Coverage](04-coverage.md) →
+← [Census](03-census.md) · Next: [Coverage](05-coverage.md) →
 
 Write the adapters for the catalogues that hold most of what people look for, starting with VuFind because one adapter covers several catalogues (UNAM Descubridor, Nautilo, UAM Iztapalapa).
 

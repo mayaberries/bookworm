@@ -6,13 +6,13 @@
 
 ## 🏷️ Boards
 
-|Board|Label|Covers|[Fnd](../stages/01-foundation.md)|[Cen](../stages/02-census.md)|[Cat](../stages/03-first-catalogues.md)|[Cov](../stages/04-coverage.md)|
-|---|---|---|:-:|:-:|:-:|:-:|
-|🏗️ [PLT · Platform](PLT.md)|`board:PLT`|Packaging, CLI, test harness, CI|●||||
-|📇 [DIR · Directory](DIR.md)|`board:DIR`|The record models, files, repositories and the record check (`modules/directory/`)|●||||
-|🗺️ [MAP · Census](MAP.md)|`board:MAP`|The records themselves: finding libraries and catalogues, checking robots.txt, verifying||●|●||
-|🔌 [CAT · Catalogues](CAT.md)|`board:CAT`|The adapter port, gateway and every adapter (`modules/catalogues/`)|●||●|●|
-|🔎 [LKP · Lookup](LKP.md)|`board:LKP`|Availability across libraries, outcomes, results (`modules/lookup/`)|●|||●|
+|Board|Label|Covers|[Fnd](../stages/01-foundation.md)|[Dis](../stages/02-distribution.md)|[Cen](../stages/03-census.md)|[Cat](../stages/04-first-catalogues.md)|[Cov](../stages/05-coverage.md)|
+|---|---|---|:-:|:-:|:-:|:-:|:-:|
+|🏗️ [PLT · Platform](PLT.md)|`board:PLT`|Packaging and distribution (vaults, settings, plugin, releases), CLI and other entry points, test harness, CI|●|●||||
+|📇 [DIR · Directory](DIR.md)|`board:DIR`|The record models, files, repositories and the record check (`modules/directory/`)|●|||||
+|🗺️ [MAP · Census](MAP.md)|`board:MAP`|The records themselves: finding libraries and catalogues, checking robots.txt, verifying|||●|●||
+|🔌 [CAT · Catalogues](CAT.md)|`board:CAT`|The adapter port, gateway and every adapter (`modules/catalogues/`)|●|||●|●|
+|🔎 [LKP · Lookup](LKP.md)|`board:LKP`|Availability across libraries, outcomes, results (`modules/lookup/`)|●|●|||●|
 
 ## 📏 Rules
 

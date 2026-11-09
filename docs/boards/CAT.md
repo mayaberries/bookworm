@@ -11,10 +11,10 @@ The unified internal API over catalogues: canonical book models, the adapter por
 |Stage|Story|Issue|
 |---|---|---|
 |[Foundation](../stages/01-foundation.md)|Adapter port, registry and gateway, with reference adapters|—|
-|[First catalogues](../stages/03-first-catalogues.md)|VuFind REST API adapter||
-|[First catalogues](../stages/03-first-catalogues.md)|VuFind HTML adapter, with holdings||
-|[First catalogues](../stages/03-first-catalogues.md)|Biblioteca Vasconcelos browser adapter||
-|[Coverage](../stages/04-coverage.md)|Adapters for the next catalogue systems||
+|[First catalogues](../stages/04-first-catalogues.md)|VuFind REST API adapter||
+|[First catalogues](../stages/04-first-catalogues.md)|VuFind HTML adapter, with holdings||
+|[First catalogues](../stages/04-first-catalogues.md)|Biblioteca Vasconcelos browser adapter||
+|[Coverage](../stages/05-coverage.md)|Adapters for the next catalogue systems||
 
 ## 🎫 Tickets
 

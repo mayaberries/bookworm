@@ -19,9 +19,10 @@ A story is one row in a stage file's Stories table. Use the vocabulary in `docs/
 |Stage file|Milestone|Label|
 |---|---|---|
 |01-foundation|Foundation|`stage:foundation`|
-|02-census|Census|`stage:census`|
-|03-first-catalogues|First catalogues|`stage:catalogues`|
-|04-coverage|Coverage|`stage:coverage`|
+|02-distribution|Distribution|`stage:distribution`|
+|03-census|Census|`stage:census`|
+|04-first-catalogues|First catalogues|`stage:catalogues`|
+|05-coverage|Coverage|`stage:coverage`|
 
 ## 2. Draft the test cases
 

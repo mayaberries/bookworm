@@ -59,7 +59,7 @@ uv run bookworm libraries show <slug>
 
 ## 4. Many at once (census)
 
-For a batch (an alcaldía, a university), one task per batch, each record sourced. If you're writing a script to produce records from a directory, stop: importers are an open decision (`docs/stages/02-census.md`). Until it's made, a throwaway script in the scratchpad that writes files through `LibrariesRepository.save` is fine, and the records it produces are reviewed like hand-written ones.
+For a batch (an alcaldía, a university), one task per batch, each record sourced. If you're writing a script to produce records from a directory, stop: importers are an open decision (`docs/stages/03-census.md`). Until it's made, a throwaway script in the scratchpad that writes files through `LibrariesRepository.save` is fine, and the records it produces are reviewed like hand-written ones.
 
 ## Checklist
 

@@ -1,6 +1,6 @@
 # 🗺️ Census: every library we can find, and how to ask it
 
-← [Foundation](01-foundation.md) · Next: [First catalogues](03-first-catalogues.md) →
+← [Distribution](02-distribution.md) · Next: [First catalogues](04-first-catalogues.md) →
 
 Put a record in `data/` for every library in Mexico City we can find, with its catalogue (or `null`), and a record for every catalogue with its software and whether we may query it. This stage is mostly data work (the MAP board): its "tests" are `make check-records` and a person checking each source.
 

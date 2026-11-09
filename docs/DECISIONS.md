@@ -16,6 +16,69 @@
 
 Newest first. Each one says when it was made, what was decided, why, and what it implies.
 
+### Records outside the repo: a bundled snapshot and user vaults
+
+*Distribution · 2026-11-09*
+
+**Decision**
+
+- **The wheel carries the records** (`data/libraries/`, `data/catalogues/`) as a read-only snapshot, plus the vault scaffold (templates, `Directory Board.md`, portable `.obsidian/` files). `data/` stays the only copy in the repo.
+- **The data directory is looked up, not assumed**: `--data-dir` → `BOOKWORM_DATA_DIR` → the config file → the nearest vault (a folder with `bookworm.toml`) at or above the current directory → the bundled snapshot. `REPO_ROOT` goes; the repo is a vault like any other.
+- **A user's vault holds copies**, made by `bookworm vault init` with a hash of each record. `vault update` adds new records and refreshes unedited ones, never overwrites an edited one, never deletes.
+- **Per-user settings** live in `$XDG_CONFIG_HOME/bookworm/config.toml` (default `~/.config/bookworm/`), under the environment; `.env` in the current directory stays for dev.
+
+**Why**
+
+- An installed bookworm resolved `data/` inside `site-packages` and found nothing.
+- An overlay (the snapshot underneath, the user's records on top) would avoid copies, but Obsidian's Dataview sees only files in the vault, so the board would show a fraction of the records. Copies plus a merge that never overwrites keep the board whole and the user's edits safe.
+- One config path on every OS is one path to document and for `doctor` to check.
+
+**Implies**
+
+- Record skills write to a vault, never to the snapshot; `doctor` says which one is in use.
+- A record's upstream fix reaches users through a release and `vault update`; their own fixes reach upstream as pull requests.
+- Stories: [Distribution](stages/02-distribution.md) 1 and 2.
+
+### Entry points: the CLI first, MCP and a UI beside it
+
+*Distribution · 2026-11-09*
+
+**Decision**
+
+- **`--json` on every command is the agent contract**: one JSON document on stdout, errors as `{"error": {"kind", "detail"}}` with the existing exit codes, output shapes pinned by schema snapshots. The Claude Code plugin's skills use it.
+- **An MCP server (`bookworm mcp`, optional extra `bookworm[mcp]`) is a second entry point**, built later in the stage, returning the same models. A UI would be a third.
+- The rule "the CLI is the only entry point" becomes: **entry points are imported by nothing, and each calls one service method per request.** The import-linter contract lists each one.
+- **User skills ship as a Claude Code plugin from this repo**, versioned with the package; a `SessionStart` hook reports a version mismatch. Developer skills stay in `.claude/skills/`.
+
+**Why**
+
+- The services are already the API; every way of asking only needs to parse, call and render. A stable JSON shape lets skills, MCP and a UI share one contract instead of each scraping tables.
+- MCP reaches agents beyond Claude Code without a shell, but needs an SDK and a server to maintain. The CLI's JSON gets agents working now; MCP waits until that contract settles.
+- pip can't install skills where Claude Code finds them; a plugin can, and updates them.
+
+**Implies**
+
+- Changing a command's JSON is a CHANGELOG entry and a snapshot update, not a refactor.
+- Knowledge an installed user needs lives in the plugin's skills, not in `CLAUDE.md`, which only loads inside the repo.
+- Stories: [Distribution](stages/02-distribution.md) 3, 5 and 7.
+
+### Dependency ranges in the package, exact versions in the lock
+
+*Distribution · 2026-11-09*
+
+**Decision**
+
+- `[project].dependencies` declare ranges, from the locked version up to the next major (`pydantic>=2.14.3,<3`). `uv.lock` pins every version exactly, and `make` and CI run against it. Dev tools stay exact in `[dependency-groups]`.
+
+**Why**
+
+- Exact pins in a package's metadata make it uninstallable next to anything that needs a different patch release, as a UI importing bookworm would. The lock already gives the reproducibility the exact pins were for.
+
+**Implies**
+
+- "Versions move deliberately, with the suite green" now means: change `uv.lock` on purpose (`uv lock --upgrade-package …`) and keep each range's lower bound equal to the locked version (PLT-023).
+- Applied by [Distribution](stages/02-distribution.md) story 6; until then `pyproject.toml` still pins exactly.
+
 ### Catalogue adapters: ports and adapters behind one gateway
 
 *Foundation · 2026-11-09*
@@ -71,9 +134,9 @@ Newest first. Each one says when it was made, what was decided, why, and what it
 
 **Decision**
 
-- **Python 3.13 with uv**, every dependency pinned exactly in `pyproject.toml` (Kalens' and Xolo's rule: versions move deliberately, with the suite green). Pydantic for every model, httpx for HTTP, Playwright for browsers, Typer for the CLI.
+- **Python 3.13 with uv**, every dependency pinned exactly in `pyproject.toml` (Kalens' and Xolo's rule: versions move deliberately, with the suite green). *Changed 2026-11-09: the package declares ranges and the lock stays exact; see [Dependency ranges in the package, exact versions in the lock](#dependency-ranges-in-the-package-exact-versions-in-the-lock).* Pydantic for every model, httpx for HTTP, Playwright for browsers, Typer for the CLI.
 - **Sinapsis' structure: modules first, layers inside.** `modules/directory/` (records), `modules/catalogues/` (the unified API over catalogues), `modules/lookup/` (the use case). Layers are files, in one direction: `service → gateway → adapters → registry → repository → port → schemas`, each optional. Modules use each other only through their package's `__init__`. `shared/` (config, errors, model bases, clients, frontmatter) imports no module.
-- **The CLI is the only entry point** (the routes of the API projects): it parses into an input model, calls one service method, renders, and maps domain errors to exit codes in one place.
+- **The CLI is the only entry point** (the routes of the API projects): it parses into an input model, calls one service method, renders, and maps domain errors to exit codes in one place. *Changed 2026-11-09: the CLI comes first, and MCP and a UI may sit beside it; see [Entry points](#entry-points-the-cli-first-mcp-and-a-ui-beside-it).*
 - `make lint` enforces the layering with import-linter, and Ruff; `make typecheck` runs mypy `--strict`.
 - **Workflow:** Sinapsis' and Xolo's stages, stories, tasks, boards and test IDs, with their `create-story`, `create-task` and `close-ticket` skills adapted. The architecture skills (`create-model`, `create-repository`, `create-service`, `add-setting`, `write-tests`) are adapted from the ones shared by Vetted, Sinapsis, Kalens and Xolo, without HTTP or SQL.
 
