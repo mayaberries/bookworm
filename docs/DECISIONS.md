@@ -63,6 +63,7 @@ Newest first. Each one says when it was made, what was decided, why, and what it
 
 - The repositories (`modules/directory/repository.py`) read files on every call; there's no cache to invalidate. If that gets slow, a cache goes behind the same methods.
 - Changing a record model's field is a change to every file: rename in one PR with all files updated, and `check-records` green.
+- The repo is an Obsidian vault set up like the writing vault: `Directory Board.md` and per-catalogue Dataview tables over the records, templates in `data/_templates/`, code folders hidden, only portable `.obsidian/` settings tracked (2026-11-09).
 
 ### Python, modules first, layers enforced
 

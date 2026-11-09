@@ -19,7 +19,7 @@ The file name is the slug: lowercase, ASCII, hyphens, `^[a-z0-9]+(-[a-z0-9]+)*$`
 
 ## 2. Write the file
 
-Copy `data/libraries/_template.md` to `data/libraries/<slug>.md`. The fields are `LibraryRecord` in `src/bookworm/modules/directory/schemas.py`, which is the source of truth; unknown keys are an error.
+Create `data/libraries/<slug>.md` from `data/_templates/library.md` (in Obsidian: new note in `data/libraries/`, then *Templates: Insert template* → `library`; or copy the file). The fields are `LibraryRecord` in `src/bookworm/modules/directory/schemas.py`, which is the source of truth; unknown keys are an error.
 
 ```markdown
 ---

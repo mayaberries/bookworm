@@ -1,0 +1,12 @@
+/*
+ * Hides the code folders from the file explorer, as Sinapsis does. They're
+ * also in Settings → Files and links → Excluded files (app.json,
+ * `userIgnoreFilters`), which keeps them out of search, the graph and the
+ * quick switcher but still shows them, dimmed, in the explorer. A new
+ * top-level code folder goes in both.
+ */
+.nav-folder:has(> .nav-folder-title[data-path="src"]),
+.nav-folder:has(> .nav-folder-title[data-path="tests"]),
+.nav-file:has(> .nav-file-title[data-path="uv.lock"]) {
+  display: none;
+}

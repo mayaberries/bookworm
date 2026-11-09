@@ -8,5 +8,36 @@ __pycache__/
 dist/
 .env
 
-# Obsidian: config is tracked, workspace state is not
+# --- Obsidian ---------------------------------------------------------------
+# Same rules as the writing vault: ignore everything in .obsidian, then
+# re-include only portable settings.
+.obsidian/*
+
+# Core settings
+!.obsidian/app.json
+!.obsidian/appearance.json
+!.obsidian/core-plugins.json
+!.obsidian/community-plugins.json
+!.obsidian/hotkeys.json
+!.obsidian/graph.json
+!.obsidian/templates.json
+
+# CSS snippets and themes
+!.obsidian/snippets/
+!.obsidian/themes/
+
+# Community plugins: keep each plugin's manifest + settings, not its bundled code
+# (main.js / styles.css are reinstalled from the community plugin browser).
+!.obsidian/plugins/
+.obsidian/plugins/*/*
+!.obsidian/plugins/*/manifest.json
+!.obsidian/plugins/*/data.json
+
+# Per-device UI state (open tabs, panes, recent files)
 .obsidian/workspace*.json
+
+# Trash and caches
+.trash/
+
+# --- macOS ------------------------------------------------------------------
+.DS_Store

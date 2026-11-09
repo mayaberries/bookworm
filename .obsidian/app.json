@@ -1,0 +1,9 @@
+{
+  "vimMode": true,
+  "alwaysUpdateLinks": true,
+  "userIgnoreFilters": [
+    "src/",
+    "tests/",
+    "uv.lock"
+  ]
+}

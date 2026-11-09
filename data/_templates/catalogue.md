@@ -1,5 +1,5 @@
 ---
-# Copy to <slug>.md (lowercase, hyphens). The file name is the slug.
+# A new note in data/catalogues/ named <slug> (lowercase, hyphens). The file name is the slug.
 # Fields: src/bookworm/modules/directory/schemas.py (CatalogueRecord).
 # Check with `make check-records`. Skill: add-catalogue.
 name: Example Catalogue
@@ -20,3 +20,16 @@ verification:
 
 What the catalogue is, how it behaves, what was tried and what was seen.
 Link example records and searches.
+
+## Libraries in this catalogue
+
+```dataview
+TABLE WITHOUT ID
+  file.link AS "Library",
+  alcaldia AS "Alcaldía",
+  catalogue_location AS "Code here",
+  verification.status AS "Verified"
+FROM "data/libraries"
+WHERE catalogue = this.file.name
+SORT file.name ASC
+```

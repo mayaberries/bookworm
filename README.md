@@ -13,7 +13,7 @@ uv run bookworm find --isbn 978-1-60732-222-1
 make verify                  # lint, types, tests, records
 ```
 
-Libraries and catalogues are Markdown files in `data/`. How the code is organised is in `CLAUDE.md`, why in `docs/DECISIONS.md`, and what comes next in `docs/ROADMAP.md`.
+Libraries and catalogues are Markdown files in `data/`. The repo is also an Obsidian vault: open it and start from `Directory Board.md` (needs the Dataview plugin). How the code is organised is in `CLAUDE.md`, why in `docs/DECISIONS.md`, and what comes next in `docs/ROADMAP.md`.
 
 ## The problem
 

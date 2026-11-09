@@ -45,7 +45,7 @@ access:
 
 ## 4. Write the file
 
-Copy `data/catalogues/_template.md` to `data/catalogues/<slug>.md`. Fields: `CatalogueRecord` in `src/bookworm/modules/directory/schemas.py`.
+Create `data/catalogues/<slug>.md` from `data/_templates/catalogue.md` (in Obsidian: new note in `data/catalogues/`, then *Templates: Insert template* → `catalogue`; or copy the file). Keep the template's "Libraries in this catalogue" block at the end of the notes. Fields: `CatalogueRecord` in `src/bookworm/modules/directory/schemas.py`.
 
 - `system`: `vufind`, `aleph`, `koha`, `janium`, `custom` (a one-off site), `unknown`. It's descriptive; the adapter ids decide behaviour.
 - `base_url`: the catalogue's root (for VuFind, the path VuFind lives under, e.g. `https://biblioteca.izt.uam.mx/vufind`).

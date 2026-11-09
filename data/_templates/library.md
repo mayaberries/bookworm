@@ -1,5 +1,5 @@
 ---
-# Copy to <slug>.md (lowercase, hyphens). The file name is the slug.
+# A new note in data/libraries/ named <slug> (lowercase, hyphens). The file name is the slug.
 # Fields: src/bookworm/modules/directory/schemas.py (LibraryRecord).
 # Check with `make check-records`. Skill: add-library.
 name: Example Library

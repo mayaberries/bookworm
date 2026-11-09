@@ -79,6 +79,18 @@ A record is a Markdown file: YAML frontmatter (validated by `LibraryRecord` / `C
 - A title/author search marks every match `possible`; only an ISBN listed in the record is `exact`.
 - `holdings=None` (the adapter didn't fetch copies) and `holdings=()` (no copies) are different, and give different outcomes.
 
+## The Obsidian vault
+
+The repo is also an Obsidian vault, set up like the writing vault (`~/Documents/writing`):
+
+- `Directory Board.md` (root): Dataview tables over the records (libraries, catalogues, "call or visit", "to check"). It reads frontmatter live: change a record, not the board.
+- Each catalogue record ends with a `## Libraries in this catalogue` Dataview block, as author notes in the writing vault list their works. Keep it when editing a catalogue's notes; it's part of the body, which the code reads as `notes`.
+- Templates are in `data/_templates/` (`library.md`, `catalogue.md`), the core Templates plugin's folder. The repositories only read `data/libraries/` and `data/catalogues/`, and skip `_`-prefixed files there.
+- Record fields that point at other records (`catalogue`, `interlibrary_loan`) are slugs, not wikilinks: the code reads them. Dataview builds links from them (`link("data/catalogues/" + catalogue)`).
+- The code folders (`src/`, `tests/`) and `uv.lock` are excluded in `.obsidian/app.json` (`userIgnoreFilters`) and hidden from the file explorer by the `hide-code-folders` snippet, as in Sinapsis. Add any new top-level code folder to both.
+- `.gitignore` tracks only portable `.obsidian/` settings and plugin manifests (the writing vault's rules); `workspace.json` and plugins' `main.js` stay local. Community plugins: Dataview only. obsidian-git is left out on purpose: commits here go through the normal git workflow.
+- `alwaysUpdateLinks` is on: renaming a note in Obsidian updates Markdown links to it. Renaming a *record* also changes its slug, so update the slugs that reference it (`make check-records` finds them).
+
 ## Skills
 
 Use the project skills for these, so code, records and docs stay consistent:

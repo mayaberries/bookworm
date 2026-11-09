@@ -15,3 +15,16 @@ Possibly Aleph, per an older UNAM thesis.
 **robots.txt blocks automated access**, so `automation: disallowed`: bookworm
 never queries it and lookups say to search it by hand. Set `robots_checked_on`
 the next time it's checked.
+
+## Libraries in this catalogue
+
+```dataview
+TABLE WITHOUT ID
+  file.link AS "Library",
+  alcaldia AS "Alcaldía",
+  catalogue_location AS "Code here",
+  verification.status AS "Verified"
+FROM "data/libraries"
+WHERE catalogue = this.file.name
+SORT file.name ASC
+```

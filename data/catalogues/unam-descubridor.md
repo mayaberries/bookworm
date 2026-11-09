@@ -17,3 +17,16 @@ UNAM's discovery layer. Clean search URLs
   (`/api/v1/search?lookfor=maffie` returns JSON if it is).
 - To check: robots.txt, then set `automation`.
 - Example record: <https://bibmacro-descubridor.dgb.unam.mx/Record/20.500.14330-TES01000195727/Description>
+
+## Libraries in this catalogue
+
+```dataview
+TABLE WITHOUT ID
+  file.link AS "Library",
+  alcaldia AS "Alcaldía",
+  catalogue_location AS "Code here",
+  verification.status AS "Verified"
+FROM "data/libraries"
+WHERE catalogue = this.file.name
+SORT file.name ASC
+```

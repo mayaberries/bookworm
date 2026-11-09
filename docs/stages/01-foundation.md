@@ -33,7 +33,7 @@ In build order. Stories 1–4 were built before the GitHub repo existed, so they
 ### 📝 Story notes
 
 1. **Harness.** uv, pinned dependencies, Makefile (`install`, `test`, `test-live`, `lint`, `typecheck`, `check-records`, `verify`), the test-ID plugin from Xolo, import-linter contracts, the CLI's error → exit code mapping.
-2. **Records.** `LibraryRecord`, `CatalogueRecord`, file-backed repositories, `DirectoryService.check_records`, templates in `data/*/_template.md`, seed records from the README's landscape table.
+2. **Records.** `LibraryRecord`, `CatalogueRecord`, file-backed repositories, `DirectoryService.check_records`, templates in `data/_templates/`, seed records from the README's landscape table.
 3. **Adapters.** `Adapter`, `AdapterContext` (paced `get()`/`page()`, error translation), the registry, `CatalogueGateway` with fall-through, `check_access`, the `fake.memory` and `fake.http` reference adapters and a recorded response.
 4. **Lookup.** `LookupService.find`, outcomes per library, exact vs possible ISBN matches, concurrency across catalogues.
 5. **GitHub.** Blocked on the repo decision (roadmap). `.github/workflows/ci.yml` already runs `make verify`; make it a required check on `main`.
